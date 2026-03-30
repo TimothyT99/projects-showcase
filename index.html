@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tim's Project Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0a0a0f;
+            --surface: #12121a;
+            --border: #2a2a3a;
+            --text: #e8e8f0;
+            --text-muted: #8888a0;
+            --accent-blue: #4a9eff;
+            --accent-teal: #2dd4bf;
+            --accent-amber: #f59e0b;
+            --gradient-blue: linear-gradient(135deg, #4a9eff 0%, #6366f1 100%);
+            --gradient-teal: linear-gradient(135deg, #2dd4bf 0%, #06b6d4 100%);
+            --gradient-amber: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 25% 25%, rgba(74, 158, 255, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(45, 212, 191, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 100px 0 60px;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: rgba(74, 158, 255, 0.1);
+            border: 1px solid rgba(74, 158, 255, 0.2);
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--accent-blue);
+            margin-bottom: 28px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff 0%, #8888a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 620px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* Tech strip */
+        .tech-strip {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            padding: 32px 0 56px;
+            flex-wrap: wrap;
+        }
+
+        .tech-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .tech-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .tech-dot.blue { background: var(--accent-blue); }
+        .tech-dot.teal { background: var(--accent-teal); }
+        .tech-dot.amber { background: var(--accent-amber); }
+        .tech-dot.purple { background: #8b5cf6; }
+        .tech-dot.pink { background: #ec4899; }
+        .tech-dot.green { background: #22c55e; }
+
+        /* Project cards */
+        .projects {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            padding-bottom: 100px;
+        }
+
+        .project-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .project-card:nth-child(1):hover { border-color: rgba(74, 158, 255, 0.4); }
+        .project-card:nth-child(2):hover { border-color: rgba(45, 212, 191, 0.4); }
+        .project-card:nth-child(3):hover { border-color: rgba(245, 158, 11, 0.4); }
+
+        .project-visual {
+            position: relative;
+            min-height: 420px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .project-card:nth-child(1) .project-visual {
+            background: linear-gradient(135deg, #0c1929 0%, #1a2940 100%);
+        }
+        .project-card:nth-child(2) .project-visual {
+            background: linear-gradient(135deg, #0c2922 0%, #1a3d35 100%);
+        }
+        .project-card:nth-child(3) .project-visual {
+            background: linear-gradient(135deg, #291c0c 0%, #3d2e1a 100%);
+        }
+
+        .visual-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 40px;
+            width: 100%;
+        }
+
+        .project-number {
+            font-size: 80px;
+            font-weight: 800;
+            line-height: 1;
+            opacity: 0.06;
+            position: absolute;
+            top: 20px;
+            left: 30px;
+        }
+
+        .visual-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .project-card:nth-child(1) .visual-badge {
+            background: rgba(74, 158, 255, 0.15);
+            color: var(--accent-blue);
+        }
+        .project-card:nth-child(2) .visual-badge {
+            background: rgba(45, 212, 191, 0.15);
+            color: var(--accent-teal);
+        }
+        .project-card:nth-child(3) .visual-badge {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--accent-amber);
+        }
+
+        .visual-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .visual-url {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(255,255,255,0.04);
+            padding: 4px 12px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+        /* Mini data preview */
+        .data-preview {
+            margin-top: 24px;
+            text-align: left;
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 10px;
+            padding: 16px 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            line-height: 1.8;
+            color: var(--text-muted);
+            max-width: 340px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .data-preview .kw { color: #c084fc; }
+        .data-preview .str { color: #86efac; }
+        .data-preview .cmt { color: #555570; }
+        .data-preview .num { color: #67e8f9; }
+        .data-preview .fn { color: #fbbf24; }
+
+        /* API badges inside visual */
+        .api-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        .api-badge {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: var(--text-muted);
+        }
+
+        .project-info {
+            padding: 44px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .project-tag {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+        }
+
+        .project-card:nth-child(1) .project-tag { color: var(--accent-blue); }
+        .project-card:nth-child(2) .project-tag { color: var(--accent-teal); }
+        .project-card:nth-child(3) .project-tag { color: var(--accent-amber); }
+
+        .project-info h2 {
+            font-size: 1.45rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+            line-height: 1.25;
+        }
+
+        .project-info .description {
+            color: var(--text-muted);
+            font-size: 14.5px;
+            margin-bottom: 22px;
+            line-height: 1.7;
+        }
+
+        .section-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            opacity: 0.7;
+        }
+
+        .project-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 22px;
+        }
+
+        .feature-tag {
+            padding: 5px 11px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .feature-tag.tech {
+            border-color: rgba(139, 92, 246, 0.3);
+            color: #a78bfa;
+            background: rgba(139, 92, 246, 0.08);
+        }
+
+        .feature-tag.api {
+            border-color: rgba(34, 197, 94, 0.3);
+            color: #4ade80;
+            background: rgba(34, 197, 94, 0.08);
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 24px;
+            padding-top: 18px;
+            border-top: 1px solid var(--border);
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .meta-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+
+        .meta-value {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 22px;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.3s ease;
+            width: fit-content;
+        }
+
+        .project-card:nth-child(1) .project-link { background: var(--gradient-blue); }
+        .project-card:nth-child(2) .project-link { background: var(--gradient-teal); }
+        .project-card:nth-child(3) .project-link { background: var(--gradient-amber); }
+
+        .project-link:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .project-link svg {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .project-link:hover svg {
+            transform: translateX(3px);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 0 60px;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer p {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .footer a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .project-card { grid-template-columns: 1fr; }
+            .project-visual { min-height: 280px; }
+            .project-info { padding: 32px 24px; }
+        }
+
+        @media (max-width: 600px) {
+            .hero { padding: 60px 0 40px; }
+            .project-meta { gap: 16px; }
+            .tech-strip { gap: 14px; }
+        }
+
+        /* Entrance animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.8s ease forwards;
+        }
+
+        .fade-up:nth-child(1) { animation-delay: 0.1s; }
+        .fade-up:nth-child(2) { animation-delay: 0.25s; }
+        .fade-up:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+
+    <div class="container">
+        <section class="hero">
+            <div class="hero-badge">Side Projects</div>
+            <h1>Things I've Built</h1>
+            <p>Hobby projects pulling live data from public APIs — built around local topics in Littlehampton, West Sussex.</p>
+        </section>
+
+        <div class="tech-strip">
+            <div class="tech-item"><span class="tech-dot blue"></span>JavaScript</div>
+            <div class="tech-item"><span class="tech-dot teal"></span>REST APIs</div>
+            <div class="tech-item"><span class="tech-dot green"></span>Netlify Functions</div>
+            <div class="tech-item"><span class="tech-dot purple"></span>Real-Time Data</div>
+            <div class="tech-item"><span class="tech-dot amber"></span>Apple / Siri</div>
+            <div class="tech-item"><span class="tech-dot pink"></span>Responsive UI</div>
+        </div>
+
+        <div class="projects">
+
+            <!-- Project 1: Littlehampton Beach -->
+            <div class="project-card fade-up">
+                <div class="project-visual">
+                    <div class="project-number">01</div>
+                    <div class="visual-content">
+                        <div class="visual-badge">Live Data</div>
+                        <div class="visual-title">Littlehampton Beach</div>
+                        <div class="visual-url">littlehamptonbeach.co.uk</div>
+                        <div class="data-preview">
+                            <span class="cmt">// 7-day watersports forecast</span><br>
+                            <span class="kw">fetch</span>(<span class="str">"open-meteo.com/v1/forecast"</span>)<br>
+                            &nbsp;&nbsp;.then(res =&gt; <span class="fn">buildForecast</span>(res))<br>
+                            <span class="cmt">// tides, waves, sewage alerts</span>
+                        </div>
+                        <div class="api-badges">
+                            <span class="api-badge">Open-Meteo</span>
+                            <span class="api-badge">ADMIRALTY Tides</span>
+                            <span class="api-badge">Coastal Monitoring</span>
+                            <span class="api-badge">Southern Water</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <div class="project-tag">Watersports Dashboard</div>
+                    <h2>7-Day Forecast for Swimming, Kayaking &amp; SUP</h2>
+                    <p class="description">A live watersports dashboard that combines weather, tide, wave, and water quality data into daily activity recommendations. Shows real-time conditions — air and sea temperature, wind, wave height — plus wetsuit advice, UV warnings, and sewage discharge alerts from Southern Water outfalls.</p>
+                    <div class="section-label">Tech &amp; APIs</div>
+                    <div class="project-features">
+                        <span class="feature-tag tech">JavaScript</span>
+                        <span class="feature-tag tech">CSS Grid</span>
+                        <span class="feature-tag tech">Responsive UI</span>
+                        <span class="feature-tag api">Open-Meteo API</span>
+                        <span class="feature-tag api">ADMIRALTY Tidal Data</span>
+                        <span class="feature-tag api">Coastal Monitoring API</span>
+                        <span class="feature-tag api">Southern Water Overflows</span>
+                    </div>
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Type</span>
+                            <span class="meta-value">Live Dashboard</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Data Sources</span>
+                            <span class="meta-value">4 APIs</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Updates</span>
+                            <span class="meta-value">Real-Time</span>
+                        </div>
+                    </div>
+                    <a href="https://littlehamptonbeach.co.uk" target="_blank" class="project-link">
+                        Visit Site
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project 2: Lyminster Crossing -->
+            <div class="project-card fade-up">
+                <div class="project-visual">
+                    <div class="project-number">02</div>
+                    <div class="visual-content">
+                        <div class="visual-badge">Live Data</div>
+                        <div class="visual-title">Lyminster Crossing</div>
+                        <div class="visual-url">lyminstercrossing.netlify.app</div>
+                        <div class="data-preview">
+                            <span class="cmt">// predict barrier closures</span><br>
+                            <span class="kw">const</span> offset = <span class="num">150</span>; <span class="cmt">// secs from stn</span><br>
+                            <span class="kw">const</span> gate = <span class="fn">calcWindow</span>(train);<br>
+                            <span class="cmt">// live via Realtime Trains</span>
+                        </div>
+                        <div class="api-badges">
+                            <span class="api-badge">Realtime Trains</span>
+                            <span class="api-badge">Netlify Functions</span>
+                            <span class="api-badge">Siri Shortcuts</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <div class="project-tag">Live Crossing Status</div>
+                    <h2>Predict Level Crossing Closures &amp; Plan Faster Journeys</h2>
+                    <p class="description">Uses live train data from Realtime Trains to predict when the Lyminster level crossing barriers will drop, so drivers can time their journeys and avoid waiting. Calculates gate windows by offsetting train departure times from nearby stations. Integrates with Apple Shortcuts and Siri for hands-free status checks.</p>
+                    <div class="section-label">Tech &amp; APIs</div>
+                    <div class="project-features">
+                        <span class="feature-tag tech">JavaScript</span>
+                        <span class="feature-tag tech">Netlify Functions</span>
+                        <span class="feature-tag tech">Serverless Proxy</span>
+                        <span class="feature-tag tech">Apple Shortcuts / Siri</span>
+                        <span class="feature-tag api">Realtime Trains API</span>
+                        <span class="feature-tag">Live Countdown</span>
+                        <span class="feature-tag">Mock Data Fallback</span>
+                    </div>
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Type</span>
+                            <span class="meta-value">Live Status App</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Refresh</span>
+                            <span class="meta-value">Every 30s</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Platform</span>
+                            <span class="meta-value">Web + Siri</span>
+                        </div>
+                    </div>
+                    <a href="https://lyminstercrossing.netlify.app" target="_blank" class="project-link">
+                        Visit Site
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project 3: Courtwick Lane -->
+            <div class="project-card fade-up">
+                <div class="project-visual">
+                    <div class="project-number">03</div>
+                    <div class="visual-content">
+                        <div class="visual-badge">Live</div>
+                        <div class="visual-title">Courtwick Lane</div>
+                        <div class="visual-url">courtwicklanedevelopment.co.uk</div>
+                        <div class="data-preview">
+                            <span class="cmt">// community planning campaign</span><br>
+                            <span class="kw">const</span> ref = <span class="str">"LU/72/25/OUT"</span>;<br>
+                            <span class="kw">const</span> goal = <span class="str">"inform &amp; engage"</span>;
+                        </div>
+                        <div class="api-badges">
+                            <span class="api-badge">Static Site</span>
+                            <span class="api-badge">Custom Domain</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <div class="project-tag">Community Campaign</div>
+                    <h2>Local Planning Response &amp; Resident Engagement</h2>
+                    <p class="description">A campaign site helping local residents understand and respond to a proposed development on Courtwick Lane (planning ref LU/72/25/OUT). Focused on clear communication — making planning info accessible and giving the community a way to engage with the process.</p>
+                    <div class="section-label">Tech &amp; Skills</div>
+                    <div class="project-features">
+                        <span class="feature-tag tech">HTML5</span>
+                        <span class="feature-tag tech">CSS3</span>
+                        <span class="feature-tag tech">Custom Domain</span>
+                        <span class="feature-tag">UX Writing</span>
+                        <span class="feature-tag">Call-to-Action Design</span>
+                        <span class="feature-tag">Responsive Layout</span>
+                    </div>
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Type</span>
+                            <span class="meta-value">Campaign Site</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Topic</span>
+                            <span class="meta-value">Planning Response</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Status</span>
+                            <span class="meta-value">Live</span>
+                        </div>
+                    </div>
+                    <a href="https://courtwicklanedevelopment.co.uk" target="_blank" class="project-link">
+                        Visit Site
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <footer class="footer">
+            <p>Built by <a href="mailto:tim@web40.co.uk">Tim</a> &middot; web40.co.uk</p>
+        </footer>
+    </div>
+</body>
+</html>
