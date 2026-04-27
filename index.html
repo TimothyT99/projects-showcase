@@ -22,6 +22,8 @@
             --gradient-amber: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
             --accent-cyan: #22d3ee;
             --gradient-cyan: linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%);
+            --accent-violet: #a78bfa;
+            --gradient-violet: linear-gradient(135deg, #a78bfa 0%, #ec4899 100%);
         }
 
         body {
@@ -164,6 +166,7 @@
         .project-card:nth-child(2):hover { border-color: rgba(45, 212, 191, 0.4); }
         .project-card:nth-child(3):hover { border-color: rgba(245, 158, 11, 0.4); }
         .project-card:nth-child(4):hover { border-color: rgba(34, 211, 238, 0.4); }
+        .project-card:nth-child(5):hover { border-color: rgba(167, 139, 250, 0.4); }
 
         .project-visual {
             position: relative;
@@ -185,6 +188,9 @@
         }
         .project-card:nth-child(4) .project-visual {
             background: linear-gradient(135deg, #0c2129 0%, #1a3540 100%);
+        }
+        .project-card:nth-child(5) .project-visual {
+            background: linear-gradient(135deg, #1a0c29 0%, #2d1a40 100%);
         }
 
         .visual-content {
@@ -231,6 +237,10 @@
         .project-card:nth-child(4) .visual-badge {
             background: rgba(34, 211, 238, 0.15);
             color: var(--accent-cyan);
+        }
+        .project-card:nth-child(5) .visual-badge {
+            background: rgba(167, 139, 250, 0.15);
+            color: var(--accent-violet);
         }
 
         .visual-title {
@@ -312,6 +322,7 @@
         .project-card:nth-child(2) .project-tag { color: var(--accent-teal); }
         .project-card:nth-child(3) .project-tag { color: var(--accent-amber); }
         .project-card:nth-child(4) .project-tag { color: var(--accent-cyan); }
+        .project-card:nth-child(5) .project-tag { color: var(--accent-violet); }
 
         .project-info h2 {
             font-size: 1.45rem;
@@ -410,6 +421,7 @@
         .project-card:nth-child(2) .project-link { background: var(--gradient-teal); }
         .project-card:nth-child(3) .project-link { background: var(--gradient-amber); }
         .project-card:nth-child(4) .project-link { background: var(--gradient-cyan); }
+        .project-card:nth-child(5) .project-link { background: var(--gradient-violet); }
 
         .project-link:hover {
             transform: translateX(4px);
@@ -467,6 +479,7 @@
         .fade-up:nth-child(2) { animation-delay: 0.25s; }
         .fade-up:nth-child(3) { animation-delay: 0.4s; }
         .fade-up:nth-child(4) { animation-delay: 0.55s; }
+        .fade-up:nth-child(5) { animation-delay: 0.7s; }
 
         @keyframes fadeUp {
             to { opacity: 1; transform: translateY(0); }
@@ -490,6 +503,7 @@
             <div class="tech-item"><span class="tech-dot purple"></span>Real-Time Data</div>
             <div class="tech-item"><span class="tech-dot amber"></span>Apple / Siri</div>
             <div class="tech-item"><span class="tech-dot pink"></span>Responsive UI</div>
+            <div class="tech-item"><span class="tech-dot purple"></span>GitHub Actions</div>
         </div>
 
         <div class="projects">
@@ -709,6 +723,63 @@
                         </div>
                     </div>
                     <a href="https://riverarun.netlify.app" target="_blank" class="project-link">
+                        Visit Site
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project 5: IoW Ticket Tracker -->
+            <div class="project-card fade-up">
+                <div class="project-visual">
+                    <div class="project-number">05</div>
+                    <div class="visual-content">
+                        <div class="visual-badge">Automated</div>
+                        <div class="visual-title">IoW Ticket Tracker</div>
+                        <div class="visual-url">iow-ticket-tracker.netlify.app</div>
+                        <div class="data-preview">
+                            <span class="cmt">// scrape → commit → deploy</span><br>
+                            <span class="kw">const</span> signal = <span class="fn">computeSignal</span>(snaps);<br>
+                            <span class="cmt">// Playwright + GitHub Actions</span><br>
+                            <span class="kw">if</span> (avg &lt; fv) <span class="fn">alert</span>(<span class="str">"buy zone"</span>);
+                        </div>
+                        <div class="api-badges">
+                            <span class="api-badge">Playwright</span>
+                            <span class="api-badge">GitHub Actions</span>
+                            <span class="api-badge">Chart.js</span>
+                            <span class="api-badge">Twickets</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <div class="project-tag">Price Intelligence</div>
+                    <h2>Isle of Wight Festival — Resale Ticket Price Tracker</h2>
+                    <p class="description">Tracks resale ticket prices for the IoW Festival by scraping Twickets listings with Playwright on a scheduled GitHub Actions workflow. Calculates buy/sell signals based on days to festival, price momentum, and lineup announcements. Fingerprints listings to infer sold tickets, with Chart.js visualisations for trends, supply, and price distribution.</p>
+                    <div class="section-label">Tech &amp; APIs</div>
+                    <div class="project-features">
+                        <span class="feature-tag tech">Playwright Scraping</span>
+                        <span class="feature-tag tech">GitHub Actions</span>
+                        <span class="feature-tag tech">Chart.js</span>
+                        <span class="feature-tag tech">Netlify</span>
+                        <span class="feature-tag api">Twickets Data</span>
+                        <span class="feature-tag">Buy/Sell Signals</span>
+                        <span class="feature-tag">Sold Inference</span>
+                    </div>
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Type</span>
+                            <span class="meta-value">Price Tracker</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Automation</span>
+                            <span class="meta-value">Every 3 Days</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Charts</span>
+                            <span class="meta-value">6 Visualisations</span>
+                        </div>
+                    </div>
+                    <a href="https://iow-ticket-tracker.netlify.app" target="_blank" class="project-link">
                         Visit Site
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
                     </a>
