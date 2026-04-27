@@ -738,10 +738,10 @@
                         <div class="visual-title">IoW Ticket Tracker</div>
                         <div class="visual-url">iow-ticket-tracker.netlify.app</div>
                         <div class="data-preview">
-                            <span class="cmt">// scrape → commit → deploy</span><br>
-                            <span class="kw">const</span> signal = <span class="fn">computeSignal</span>(snaps);<br>
-                            <span class="cmt">// Playwright + GitHub Actions</span><br>
-                            <span class="kw">if</span> (avg &lt; fv) <span class="fn">alert</span>(<span class="str">"buy zone"</span>);
+                            <span class="cmt">// hourly Mar–Jun, daily off-season</span><br>
+                            <span class="kw">cron</span>: <span class="str">'0 6-22 * 3-6 *'</span><br>
+                            <span class="kw">const</span> sold = <span class="fn">fingerprint</span>(snap);<br>
+                            <span class="kw">const</span> signal = <span class="fn">buyOrSell</span>(data);
                         </div>
                         <div class="api-badges">
                             <span class="api-badge">Playwright</span>
@@ -754,16 +754,17 @@
                 <div class="project-info">
                     <div class="project-tag">Price Intelligence</div>
                     <h2>Isle of Wight Festival — Resale Ticket Price Tracker</h2>
-                    <p class="description">Tracks resale ticket prices for the IoW Festival by scraping Twickets listings with Playwright on a scheduled GitHub Actions workflow. Calculates buy/sell signals based on days to festival, price momentum, and lineup announcements. Fingerprints listings to infer sold tickets, with Chart.js visualisations for trends, supply, and price distribution.</p>
+                    <p class="description">Tracks IoW Festival resale ticket prices by scraping Twickets with a headless Playwright browser, automated via GitHub Actions on an optimised schedule — hourly during peak season (Mar–Jun), daily off-season. Fingerprints listings as price|qty|tier to infer sold tickets when they disappear between snapshots. Generates buy/sell timing signals from price momentum, days to festival, and lineup announcement proximity. Multi-year support with Chart.js dashboards.</p>
                     <div class="section-label">Tech &amp; APIs</div>
                     <div class="project-features">
                         <span class="feature-tag tech">Playwright Scraping</span>
-                        <span class="feature-tag tech">GitHub Actions</span>
+                        <span class="feature-tag tech">GitHub Actions CI/CD</span>
                         <span class="feature-tag tech">Chart.js</span>
                         <span class="feature-tag tech">Netlify</span>
                         <span class="feature-tag api">Twickets Data</span>
                         <span class="feature-tag">Buy/Sell Signals</span>
-                        <span class="feature-tag">Sold Inference</span>
+                        <span class="feature-tag">Listing Fingerprinting</span>
+                        <span class="feature-tag">Multi-Year</span>
                     </div>
                     <div class="project-meta">
                         <div class="meta-item">
@@ -771,8 +772,8 @@
                             <span class="meta-value">Price Tracker</span>
                         </div>
                         <div class="meta-item">
-                            <span class="meta-label">Automation</span>
-                            <span class="meta-value">Every 3 Days</span>
+                            <span class="meta-label">Peak Season</span>
+                            <span class="meta-value">Hourly Scrapes</span>
                         </div>
                         <div class="meta-item">
                             <span class="meta-label">Charts</span>
